@@ -1,6 +1,6 @@
 {
-  "name": "dating-spa",
-  "source": "src/index.html",
+  "name": "food-waste-app",
+  "source": "index.html",
   "scripts": {
     "start": "parcel",
     "run": "parcel --open",
