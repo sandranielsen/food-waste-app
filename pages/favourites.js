@@ -1,21 +1,17 @@
 export default class FavouritesPage {
   constructor() {
-    this.render();
+    this.template();
   }
 
-  render() {
-    document.querySelector("#app").insertAdjacentHTML(
-      "beforeend",
-      /*html*/ `
-      <section id="${this.id}" class="page">
+  template() {
+    document.getElementById('content').innerHTML += /*html*/ `
+      <section id="favourites" class="page">
         <header class="topbar">
           <h2>Favourites</h2>
-        </header> 
+        </header>
+        <h3>SPA Template Modules Pages</h3>
+        <p>tutututMy Single Page Web App Template</p>
       </section>
-    `
-    );
-  }
-  beforeShow(params) {
-    console.log(params);
+    `;
   }
 }

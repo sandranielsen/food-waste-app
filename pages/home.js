@@ -1,21 +1,17 @@
 export default class HomePage {
   constructor() {
-    this.render();
+    this.template();
   }
 
-  render() {
-    document.querySelector("#app").insertAdjacentHTML(
-      "beforeend",
-      /*html*/ `
-      <section id="${this.id}" class="page">
+  template() {
+    document.getElementById('content').innerHTML += /*html*/ `
+      <section id="home" class="page">
         <header class="topbar">
           <h2>Home</h2>
-        </header> 
+        </header>
+        <h3>SPA Template Modules Pages</h3>
+        <p>My Single Page Web App Template</p>
       </section>
-    `
-    );
-  }
-  beforeShow(params) {
-    console.log(params);
+    `;
   }
 }
