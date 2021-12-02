@@ -4,8 +4,8 @@ export default class MyImpactPage {
   }
 
   template() {
-    document.querySelector('#app').innerHTML += /*html*/ `
-      <section id="my_impact" class="page">
+    document.querySelector("#app").innerHTML += /*html*/ `
+      <section id="impact" class="page">
         <header class="topbar">
           <h2>my impact</h2>
         </header> 

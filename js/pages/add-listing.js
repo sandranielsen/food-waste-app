@@ -4,8 +4,8 @@ export default class AddListingPage {
   }
 
   template() {
-    document.querySelector('#app').innerHTML += /*html*/ `
-      <section id="add_listing" class="page">
+    document.querySelector("#app").innerHTML += /*html*/ `
+      <section id="add" class="page">
         <header class="topbar">
           <h2>favourites</h2>
         </header> 
