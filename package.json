@@ -1,6 +1,6 @@
 {
   "name": "food-waste-app",
-  "source": "index.html",
+  "source": "src/index.html",
   "scripts": {
     "start": "parcel",
     "run": "parcel --open",
