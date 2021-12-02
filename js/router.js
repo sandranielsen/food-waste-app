@@ -5,12 +5,12 @@ import ChatPage from "./pages/chat.js";
 import FavouritesPage from "./pages/favourites.js";
 import FilterPage from "./pages/filter.js";
 import LogInPage from "./pages/login.js";
-import MyImpactPage from "./pages/my-impact";
+import MyImpactPage from "./pages/my-impact.js";
 import MyListingsPage from "./pages/my-listings.js";
 import MyPurchasesPage from "./pages/my-purchases.js";
 import ProductPage from "./pages/product-page.js";
 import ProfilePage from "./pages/profile.js";
-import PublicProfilePage from "./pages/public-profile";
+import PublicProfilePage from "./pages/public-profile.js";
 import SignUpPage from "./pages/signup.js";
 import StartPage from "./pages/start.js";
 
@@ -77,7 +77,7 @@ class Router {
         path: "#/start",
         view: new StartPage("start"),
       },
-
+      /*
       {
         path: "#/update/:id",
         view: new UpdatePage("update"),
@@ -86,6 +86,7 @@ class Router {
         path: "#/user/:id",
         view: new UserProfilePage("profile"),
       },
+      */
     ];
 
     this.basePath = location.pathname.replace("index.html", ""); // remove index.html from path
@@ -93,18 +94,14 @@ class Router {
     this.navLinks;
   }
 
-  /**
-   * Changing display to none for all pages
-   */
+  /* Changing display to none for all pages */
   hideAllPages() {
     for (const page of this.pages) {
       page.style.display = "none";
     }
   }
 
-  /**
-   * Navigating SPA to specific page by given path
-   */
+  /* Navigating SPA to specific page by given path */
   navigateTo(path, params = {}) {
     window.history.pushState({}, path, this.basePath + path);
     this.showPage(path, params);
@@ -134,9 +131,7 @@ class Router {
     return route;
   }
 
-  /**
-   * sets active menu item by given path
-   */
+  /* Sets active menu item by given path */
   setActiveTab(path) {
     for (const link of this.navLinks) {
       if (path === link.getAttribute("href")) {
@@ -147,9 +142,7 @@ class Router {
     }
   }
 
-  /**
-   * Attaching event to nav links and preventing default anchor link event
-   */
+  /* Attaching event to nav links and preventing default anchor link event */
   attachNavLinkEvents() {
     const navLinks = document.querySelectorAll(".router-link");
     for (const link of navLinks) {
@@ -165,9 +158,7 @@ class Router {
     history.back();
   }
 
-  /**
-   * Initialising the router, calling attachNavLinkEvents(), popstate event and navigateTo()
-   */
+  /* Initialising the router, calling attachNavLinkEvents(), popstate event and navigateTo() */
   init() {
     this.pages = document.querySelectorAll(".page");
     this.navLinks = document.querySelectorAll("nav a");

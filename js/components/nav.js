@@ -6,7 +6,8 @@ class Nav {
       "afterbegin",
       /*html*/ `
             <nav class="tabbar">
-                <a href="#/" class="router-link"></a>
+                <a href="#/" class="router-link">Home</a>
+                <a href="#/add" class="router-link">Add</a>
             </nav>
         `
     );
