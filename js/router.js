@@ -1,66 +1,105 @@
-/* All routes of the SPA */
-const _routes = {
-  "#/": "home",
-  "#/add": "add",
-  "#/fav": "fav",
-  "#/profile": "profile",
-};
-const _pages = document.querySelectorAll(".page");
-const _basePath = location.pathname.replace("index.html", ""); // remove index.html from path
-const _navLinks = document.querySelectorAll("nav a");
+import AddPage from "./pages/add.js";
+import FavPage from "./pages/fav.js";
+import ProfilePage from "./pages/profile.js";
 
-/* Changing display to none for all pages */
-function hideAllPages() {
-  for (const page of _pages) {
-    page.style.display = "none";
+class Router {
+  constructor() {
+    this.routes = [
+      {
+        path: "/",
+        view: new AddPage("add"),
+      },
+      {
+        path: "/fav",
+        view: new FavPage("fav"),
+      },
+      {
+        path: "/update/:id",
+        view: new UpdatePage("update"),
+      },
+      {
+        path: "/user/:id",
+        view: new ProfilePage("profile"),
+      },
+    ];
+
+    this.pages;
+    this.navLinks;
   }
-}
 
-/* Navigating SPA to specific page by given path */
-function navigateTo(path) {
-  window.history.pushState({}, path, _basePath + path);
-  showPage(path);
-}
-
-function showPage(path) {
-  hideAllPages(); // Hide all pages
-  document.querySelector(`#${_routes[path]}`).style.display = "block"; // Show page by given path
-  setActiveTab(path);
-}
-
-/* Sets active menu item by given path */
-function setActiveTab(path) {
-  for (const link of _navLinks) {
-    if (path === link.getAttribute("href")) {
-      link.classList.add("active");
-    } else {
-      link.classList.remove("active");
+  /* Changing display to none for all pages */
+  hideAllPages() {
+    for (const page of this.pages) {
+      page.style.display = "none";
     }
   }
-}
 
-/* Attaching event to nav links and preventing default anchor link event */
-function attachNavLinkEvents() {
-  const navLinks = document.querySelectorAll(".nav-link");
-  for (const link of navLinks) {
-    link.addEventListener("click", function (event) {
-      const path = link.getAttribute("href");
-      navigateTo(path);
-      event.preventDefault();
+  /* Navigating SPA to specific page by given path */
+  navigateTo(path, props) {
+    window.history.pushState({}, path, path);
+    this.showPage(path, props);
+  }
+
+  showPage(path, props = {}) {
+    this.hideAllPages(); // Hides all pages
+    const route = this.matchRoute(path, props);
+    route.view.beforeShow(props);
+    document.getElementById(route.view.id).style.display = "block";
+    this.setActiveTab(route.path);
+  }
+
+  matchRoute(path, props) {
+    const route = this.routes.find((route) => {
+      if (route.path.includes("/:id")) {
+        const mainRoute = route.path.split("/:id")[0];
+        if (path.includes(mainRoute)) {
+          props.id = path.split("/").pop();
+          return route;
+        }
+      } else if (route.path.includes(path)) {
+        return route;
+      }
     });
+
+    return route;
+  }
+
+  /* Sets active menu item by given path */
+  setActiveTab(path) {
+    for (const link of this.navLinks) {
+      if (path === link.getAttribute("href")) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
+      }
+    }
+  }
+
+  /* Attaching event to nav links and preventing default anchor link event */
+  attachNavLinkEvents() {
+    const navLinks = document.querySelectorAll(".router-link");
+    for (const link of navLinks) {
+      link.addEventListener("click", (event) => {
+        const path = link.getAttribute("href");
+        this.navigateTo(path);
+        event.preventDefault();
+      });
+    }
+  }
+
+  goBack() {
+    history.back();
+  }
+
+  /* Initialising the router, calling attachNavLinkEvents(), popstate event and navigateTo() */
+  init() {
+    this.pages = document.querySelectorAll(".page");
+    this.navLinks = document.querySelectorAll("nav a");
+    this.attachNavLinkEvents();
+    window.addEventListener("popstate", () => this.showPage(location.pathname)); // Change page when using back and forth in browser
+    this.navigateTo(location.pathname);
   }
 }
 
-/* Initialising the router, calling attachNavLinkEvents(), popstate event and navigateTo() */
-function initRouter() {
-  attachNavLinkEvents();
-  window.addEventListener("popstate", () => showPage(location.hash)); // change page when using back and forth in browser
-
-  let path = "#/"; // Default path
-  if (_routes[location.hash]) {
-    path = location.hash;
-  }
-  navigateTo(path);
-}
-
-initRouter();
+const router = new Router();
+export default router;
