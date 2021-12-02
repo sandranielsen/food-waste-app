@@ -99,11 +99,11 @@ h3 {
 /* fade in */
 @keyframes fadeIn {
   from {
-    opacity: 0;
+    opacity: 0
   }
 
   to {
-    opacity: 1;
+    opacity: 1
   }
 }
 
@@ -175,12 +175,12 @@ h3 {
   }
 }
 
-.grid-container > article {
+.grid-container>article {
   text-align: center;
   padding: 10px;
 }
 
-.grid-container > article img {
+.grid-container>article img {
   max-width: 300px;
   width: 100%;
   margin-bottom: 1em;
@@ -223,10 +223,4 @@ select {
   background: #fff;
   border: 0;
   border-radius: 0;
-}
-
-.logo {
-  margin: 2em auto;
-  width: 100%;
-  max-width: 300px;
 }
