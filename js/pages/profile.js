@@ -1,15 +1,21 @@
 export default class ProfilePage {
   constructor() {
-    this.template();
+    this.render();
   }
 
-  template() {
-    document.querySelector('#app').innerHTML += /*html*/ `
-      <section id="profile" class="page">
+  render() {
+    document.querySelector("#app").insertAdjacentHTML(
+      "beforeend",
+      /*html*/ `
+      <section id="${this.id}" class="page">
         <header class="topbar">
-          <h2>profile</h2>
+          <h2>account</h2>
         </header> 
       </section>
-    `;
+    `
+    );
+  }
+  beforeShow(params) {
+    console.log(params);
   }
 }

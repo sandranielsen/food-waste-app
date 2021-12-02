@@ -1,15 +1,21 @@
 export default class ChatPage {
   constructor() {
-    this.template();
+    this.render();
   }
 
-  template() {
-    document.querySelector('#app').innerHTML += /*html*/ `
-      <section id="chat" class="page">
+  render() {
+    document.querySelector("#app").insertAdjacentHTML(
+      "beforeend",
+      /*html*/ `
+      <section id="${this.id}" class="page">
         <header class="topbar">
-          <h2>chat</h2>
+          <h2>account</h2>
         </header> 
       </section>
-    `;
+    `
+    );
+  }
+  beforeShow(params) {
+    console.log(params);
   }
 }

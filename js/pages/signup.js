@@ -1,16 +1,21 @@
 export default class SignUpPage {
   constructor() {
-    this.template();
+    this.render();
   }
 
-  template() {
-    document.querySelector('#app').innerHTML += /*html*/ `
-      <section id="signup" class="page">
+  render() {
+    document.querySelector("#app").insertAdjacentHTML(
+      "beforeend",
+      /*html*/ `
+      <section id="${this.id}" class="page">
         <header class="topbar">
-          <h2>Signup</h2>
+          <h2>account</h2>
         </header> 
-        </a>
       </section>
-    `;
+    `
+    );
+  }
+  beforeShow(params) {
+    console.log(params);
   }
 }
