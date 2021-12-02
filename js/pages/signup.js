@@ -9,7 +9,7 @@ export default class SignUpPage {
       /*html*/ `
       <section id="${this.id}" class="page">
         <header class="topbar">
-          <h2>account</h2>
+          <h2>Sign up</h2>
         </header> 
       </section>
     `

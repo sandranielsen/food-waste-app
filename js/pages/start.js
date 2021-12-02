@@ -9,7 +9,7 @@ export default class StartPage {
       /*html*/ `
       <section id="${this.id}" class="page">
         <header class="topbar">
-          <h2>account</h2>
+          <h2>Start</h2>
         </header> 
       </section>
     `
